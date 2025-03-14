@@ -2,13 +2,6 @@ import java.util.Scanner;
 import static java.lang.System.*;
 
 public class Main {
-//    public static void deathMessage() {
-//        out.println("Your inability to pick one of the options has caused you to die of boredom! Start over to try again!");
-//        exit(0);
-//    }
-//    public static void startMessage(int roomNumber) {
-//        out.println("Start in room " + roomNumber + " (Press " + roomNumber + ")");
-//    }
     public static void main(String[] args) {
         Scanner scan = new Scanner(in);
         Game g = new Game(); // This prevents the clue randomizers from changing when you re-enter a room!
@@ -19,7 +12,88 @@ public class Main {
         out.println("When asked a question, entering an option not provided by the game will cause a mysterious ghost to make you die of boredom!");
 
         String choice = scan.nextLine();
-
+        out.println("""
+                      .------------.
+                      | A          |
+                      |            |
+                      |     ♣      |  <-- Ace of Clubs
+                      |            |
+                      |          A |
+                      '------------'
+                    """);
+        out.println("""
+                      .------------.
+                      | 2          |
+                      |            |
+                      |  ♣      ♣  |  <-- 2 of Clubs
+                      |            |
+                      |          2 |
+                      '------------'
+                    """);
+        out.println("""
+                      .------------.
+                      | 3          |
+                      |    ♣       |
+                      |     ♣      |  <-- 3 of Clubs
+                      |      ♣     |
+                      |          3 |
+                      '------------'
+                   """);
+        out.println("""
+                      .------------.
+                      | 4          |
+                      |  ♣      ♣  |
+                      |            |  <-- 4 of Clubs
+                      |  ♣      ♣  |
+                      |          4 |
+                      '------------'
+                    """);
+        out.println("""
+                      .------------.
+                      | 5          |
+                      |  ♣      ♣  |
+                      |     ♣      |  <-- 5 of Clubs
+                      |  ♣      ♣  |
+                      |          5 |
+                      '------------'
+                    """);
+        out.println("""
+                      .------------.
+                      | 6          |
+                      |  ♣      ♣  |
+                      |  ♣      ♣  |  <-- 6 of Clubs
+                      |  ♣      ♣  |
+                      |          6 |
+                      '------------'
+                    """);
+        out.println("""
+                      .------------.
+                      | 7          |
+                      |  ♣      ♣  |
+                      |  ♣  ♣   ♣  |  <-- 7 of Clubs
+                      |  ♣      ♣  |
+                      |          7 |
+                      '------------'
+                    """);
+        out.println("""
+                      .------------.
+                      | 8          |
+                      |  ♣      ♣  |
+                      |  ♣      ♣  |  <-- 8 of Clubs
+                      |  ♣      ♣  |
+                      |  ♣      ♣  |
+                      |          8 |
+                      '------------'
+                    """);
+        out.println("""
+                      .------------.
+                      | 9          |
+                      |  ♣  ♣   ♣  |
+                      |  ♣      ♣  |  <-- 9 of Clubs
+                      |  ♣   ♣  ♣  |
+                      |          9 |
+                      '------------'
+                    """);
         switch (choice) {
             case "1" -> g.r1();
             case "2" -> g.r2();

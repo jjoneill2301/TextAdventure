@@ -15,9 +15,20 @@ public class Game {
     private final int r5Code = (int)(Math.random()*10);
 
     private String codeString;
-    public void PadlockCode() {
-        codeString = String.valueOf(r1Code + r2Code + r3Code + r4Code + r5Code);
+    public String PadlockCode() {
+        int tile;
+        if (r3Code <= 0.33) {
+            tile = 0;
+        } else if (r3Code <= 0.66) {
+            tile = 4;
+        } else {
+            tile = 8;
+        }
+
+        return codeString = "" + r1Code + r2Code + tile + r4Code + r5Code;
     }
+
+
 
     private String r2Month = "";
     public void setR2Month(String r2Month) {
@@ -125,13 +136,13 @@ public class Game {
                     """);
             case 3 -> out.println("""
                       .------------.
-                      | A          |
+                      | 3          |
                       |    ♣       |
-                      |     ♣      |  <-- Three of Clubs
+                      |     ♣      |  <-- 3 of Clubs
                       |      ♣     |
-                      |          A |
+                      |          3 |
                       '------------'
-                      """);
+                    """);
             case 4 -> out.println("""
                       .------------.
                       | 4          |
@@ -181,9 +192,9 @@ public class Game {
             case 9 -> out.println("""
                       .------------.
                       | 9          |
-                      |  ♣  ♣   ♣   |
+                      |  ♣  ♣   ♣  |
                       |  ♣      ♣  |  <-- 9 of Clubs
-                      |  ♣   ♣  ♣   |
+                      |  ♣   ♣  ♣  |
                       |          9 |
                       '------------'
                     """);
@@ -345,9 +356,17 @@ public class Game {
 
     }
 
-    public static void r6() {
-        out.println("Holy crap, it worked! You got out of that crazy place. You are now in room six, which is a garage. There is an old truck with a jerry can in the back. You don't know where you are or where you are going, but you're just happy to get out of that place!");
-        out.println("You win!!!");
+    public void r6() {
+        out.println("""
+                It worked! You are one step closer to getting out of this dilapidated house. You are now in room six, which is a garage.
+                There's an old truck with a jerry can in the back. You don't know where it's going to take you, but you're just happy
+                to get out of here!
+                __     ______  _    _  __          _______ _   _\s
+                \\ \\   / / __ \\| |  | | \\ \\        / /_   _| \\ | |
+                 \\ \\_/ / |  | | |  | |  \\ \\  /\\  / /  | | |  \\| |
+                  \\   /| |  | | |  | |   \\ \\/  \\/ /   | | | . ` |
+                   | | | |__| | |__| |    \\  /\\  /   _| |_| |\\  |
+                   |_|  \\____/ \\____/      \\/  \\/   |_____|_| \\_|""");
         exit(0);
     }
 }
