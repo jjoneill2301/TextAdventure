@@ -4,31 +4,30 @@ import static java.lang.System.*;
 import static java.lang.System.in;
 
 // ASCII art supplemented by ChatGPT
-public class Game {
+public class House {
+    private static boolean houseCompletion = false;
 
+    public static boolean getWinState() {
+        return houseCompletion;
+    }
+
+    public void setWinState(boolean houseCompletion) {
+        House.houseCompletion = houseCompletion;
+    }
     private final int r1Code = (int)(Math.random()*10);
     // Starts at 1 instead because 0th month won't make sense
     private final int r2Code = 1 + (int)(Math.random()*9);
-    // .33 and below 0, .66 and below 4 else 8 for tiling
+    // <= .5 code 0 else code 8
     private final double r3Code = Math.random();
     private final int r4Code = (int)(Math.random()*10);
     private final int r5Code = (int)(Math.random()*10);
 
     private String codeString;
-    public String PadlockCode() {
+    public void PadlockCode() {
         int tile;
-        if (r3Code <= 0.33) {
-            tile = 0;
-        } else if (r3Code <= 0.66) {
-            tile = 4;
-        } else {
-            tile = 8;
-        }
-
-        return codeString = "" + r1Code + r2Code + tile + r4Code + r5Code;
+        if (r3Code <= 0.5) { tile = 0; } else { tile = 8; }
+        codeString = "" + r1Code + r2Code + tile + r4Code + r5Code;
     }
-
-
 
     private String r2Month = "";
     public void setR2Month(String r2Month) {
@@ -63,18 +62,31 @@ public class Game {
 
 
     public void printR3Code() {
-        if (r3Code <= 0.33) {
+        if (r3Code <= 0.5) {
             out.println("""
                     Upon closer inspection, you see it isn't tiling at all! It is the number 0 written over and over in
-                    a dotted pattern! Creepy... Who would have done all of that?""");
-        } else if (r3Code <= 0.66) {
-            out.println("""
-                    Upon closer inspection, you see it isn't tiling at all! It is the number 4 written over and over in
-                    a grid-like pattern! Creepy... Who would have done all of that?""");
+                    a dotted pattern! Creepy... Who would have done all of that?
+                      00000000000000
+                      00000000000000
+                      00000000000000
+                      00000000000000
+                      00000000000000
+                      00000000000000
+                      00000000000000
+                    """);
         } else {
             out.println("""
                     Upon closer inspection, you see it isn't tiling at all! It is the number 8 written over and over in
-                    a looping pattern! Creepy... Who would have done all of that?""");
+                    a looping pattern! Creepy... Who would have done all of that?
+                      88888888888888
+                      88888888888888
+                      88888888888888
+                      88888888888888
+                      88888888888888
+                      88888888888888
+                      88888888888888
+                      88888888888888
+                    """);
         }
 
     }
@@ -120,7 +132,7 @@ public class Game {
                       .------------.
                       | A          |
                       |            |
-                      |     ♣      |  <-- Ace of Clubs
+                      |     ♣      |
                       |            |
                       |          A |
                       '------------'
@@ -129,7 +141,7 @@ public class Game {
                       .------------.
                       | 2          |
                       |            |
-                      |  ♣      ♣  |  <-- 2 of Clubs
+                      |  ♣      ♣  |
                       |            |
                       |          2 |
                       '------------'
@@ -138,7 +150,7 @@ public class Game {
                       .------------.
                       | 3          |
                       |    ♣       |
-                      |     ♣      |  <-- 3 of Clubs
+                      |     ♣      |
                       |      ♣     |
                       |          3 |
                       '------------'
@@ -147,7 +159,7 @@ public class Game {
                       .------------.
                       | 4          |
                       |  ♣      ♣  |
-                      |            |  <-- 4 of Clubs
+                      |            |
                       |  ♣      ♣  |
                       |          4 |
                       '------------'
@@ -156,7 +168,7 @@ public class Game {
                       .------------.
                       | 5          |
                       |  ♣      ♣  |
-                      |     ♣      |  <-- 5 of Clubs
+                      |     ♣      |
                       |  ♣      ♣  |
                       |          5 |
                       '------------'
@@ -165,7 +177,7 @@ public class Game {
                       .------------.
                       | 6          |
                       |  ♣      ♣  |
-                      |  ♣      ♣  |  <-- 6 of Clubs
+                      |  ♣      ♣  |
                       |  ♣      ♣  |
                       |          6 |
                       '------------'
@@ -174,7 +186,7 @@ public class Game {
                       .------------.
                       | 7          |
                       |  ♣      ♣  |
-                      |  ♣  ♣   ♣  |  <-- 7 of Clubs
+                      |  ♣  ♣   ♣  |
                       |  ♣      ♣  |
                       |          7 |
                       '------------'
@@ -183,7 +195,7 @@ public class Game {
                       .------------.
                       | 8          |
                       |  ♣      ♣  |
-                      |  ♣      ♣  |  <-- 8 of Clubs
+                      |  ♣      ♣  |
                       |  ♣      ♣  |
                       |  ♣      ♣  |
                       |          8 |
@@ -193,7 +205,7 @@ public class Game {
                       .------------.
                       | 9          |
                       |  ♣  ♣   ♣  |
-                      |  ♣      ♣  |  <-- 9 of Clubs
+                      |  ♣      ♣  |
                       |  ♣   ♣  ♣  |
                       |          9 |
                       '------------'
@@ -350,23 +362,15 @@ public class Game {
                 out.println("Hmm, that didn't work. You should retrace your steps and try again.");
                 r3();
             }
-        } else {
-            deathMessage();
-        }
-
+        } else { deathMessage(); }
     }
 
-    public void r6() {
+    private void r6() {
+        setWinState(true);
         out.println("""
                 It worked! You are one step closer to getting out of this dilapidated house. You are now in room six, which is a garage.
-                There's an old truck with a jerry can in the back. You don't know where it's going to take you, but you're just happy
-                to get out of here!
-                __     ______  _    _  __          _______ _   _\s
-                \\ \\   / / __ \\| |  | | \\ \\        / /_   _| \\ | |
-                 \\ \\_/ / |  | | |  | |  \\ \\  /\\  / /  | | |  \\| |
-                  \\   /| |  | | |  | |   \\ \\/  \\/ /   | | | . ` |
-                   | | | |__| | |__| |    \\  /\\  /   _| |_| |\\  |
-                   |_|  \\____/ \\____/      \\/  \\/   |_____|_| \\_|""");
-        exit(0);
+                There's an old truck with a jerry can in the back. The can is empty but the truck started and hopefully has enough gas
+                to take you somewhere other than here.
+                """);
     }
 }
