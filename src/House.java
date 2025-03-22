@@ -106,19 +106,6 @@ public class House {
         out.printf("Upon closer inspection, each shoebox is unique in the shoe it contains, but each shoe is a size %d. Who is buying all of these?!", r5Code);
     }
 
-    public static void deathMessage() {
-        out.print("""
-                  _____                         ____                \s
-                 / ____|                       / __ \\               \s
-                | |  __  __ _ _ __ ___   ___  | |  | |_   _____ _ __\s
-                | | |_ |/ _` | '_ ` _ \\ / _ \\ | |  | \\ \\ / / _ \\ '__|
-                | |__| | (_| | | | | | |  __/ | |__| |\\ V /  __/ |  \s
-                 \\_____|\\__,_|_| |_| |_|\\___|  \\____/  \\_/ \\___|_|  \s
-                """);
-        out.println("Your inability to pick one of the options has caused you to die of boredom!");
-        out.println("Start over to try again!");
-        exit(0);
-    }
     public static void startMessage(int roomNumber) {
         out.println("Start in room " + roomNumber + " (Press " + roomNumber + ")");
     }
@@ -220,11 +207,9 @@ public class House {
                   protruding from the dusty old bookshelf. Do you pick it up? (y/n)""");
         String choice = scan.nextLine().toLowerCase();
         switch (choice) {
-            case "y" ->
-                    printR1Code();
-            case "n" ->
-                    out.println("You leave the book be, but something tells you it may be important! Maybe you should revisit here?");
-            default -> deathMessage();
+            case "y" -> printR1Code();
+            case "n" -> out.println("You leave the book be, but something tells you that you should revisit it later.");
+            default -> Main.deathMessage();
         }
 
         out.println("There are two connecting rooms to room one.");
@@ -236,7 +221,7 @@ public class House {
         switch (choice) {
             case "2" -> r2();
             case "3" -> r3();
-            default -> deathMessage();
+            default -> Main.deathMessage();
         }
     }
 
@@ -253,7 +238,7 @@ public class House {
             case "n" -> out.println("""
                     What good is a calendar going to do you? Besides it's not like you can go anywhere and neither can that calendar.
                     You can always look at it later if you decide to come back.""");
-            default -> deathMessage();
+            default -> Main.deathMessage();
         }
 
         out.println("There are two connecting rooms to room two. Room one appears to be an old library, while room four is a bedroom.");
@@ -263,7 +248,7 @@ public class House {
         switch (choice) {
             case "1" -> r1();
             case "4" -> r4();
-            default -> deathMessage();
+            default -> Main.deathMessage();
         }
     }
 
@@ -278,7 +263,7 @@ public class House {
             case "y" -> printR3Code();
             case "n" ->
                     out.println("No way are you climbing into that! You have to admit though the wall looked strange. It was the only thing that stands out in this room besides the three door mystery. You don't know why you would, but you can always come back if you are out of ideas.");
-            default -> deathMessage();
+            default -> Main.deathMessage();
         }
         out.println("There are three rooms connected to room three. Room one seems to be an old library. Room four looks like an old bedroom, and room five is a mudroom/coatroom.");
         out.println("Go to room 1 (Press 1)");
@@ -289,7 +274,7 @@ public class House {
             case "1" -> r1();
             case "4" -> r4();
             case "5" -> r5();
-            default -> deathMessage();
+            default -> Main.deathMessage();
         }
 
 
@@ -311,7 +296,7 @@ public class House {
             case "n" -> out.println("""
                     You aren't gonna touch that dusty old coat! But something at the back of your mind tells you it may
                     have led to secrets. Maybe you will have to revisit this room later.""");
-            default -> deathMessage();
+            default -> Main.deathMessage();
         }
 
 
@@ -322,7 +307,7 @@ public class House {
         switch (choice) {
             case "2" -> r2();
             case "3" -> r3();
-            default -> deathMessage();
+            default -> Main.deathMessage();
         }
     }
 
@@ -337,7 +322,7 @@ public class House {
             case "n" -> out.println("""
                     Maybe if there was anywhere to run these shoes would be useful, but this house is full of dead ends.
                     The shoe boxes aren't going anywhere, so you can always check back later.""");
-            default -> deathMessage();
+            default -> Main.deathMessage();
         }
 
         out.println("There are two connecting rooms to room five. Room three appears to be the bathroom, while the other door is padlocked.");
@@ -362,7 +347,7 @@ public class House {
                 out.println("Hmm, that didn't work. You should retrace your steps and try again.");
                 r3();
             }
-        } else { deathMessage(); }
+        } else { Main.deathMessage(); }
     }
 
     private void r6() {

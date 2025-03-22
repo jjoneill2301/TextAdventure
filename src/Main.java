@@ -2,6 +2,19 @@ import java.util.Scanner;
 import static java.lang.System.*;
 
 public class Main {
+    public static void deathMessage() {
+        out.print("""
+                  _____                         ____                \s
+                 / ____|                       / __ \\               \s
+                | |  __  __ _ _ __ ___   ___  | |  | |_   _____ _ __\s
+                | | |_ |/ _` | '_ ` _ \\ / _ \\ | |  | \\ \\ / / _ \\ '__|
+                | |__| | (_| | | | | | |  __/ | |__| |\\ V /  __/ |  \s
+                 \\_____|\\__,_|_| |_| |_|\\___|  \\____/  \\_/ \\___|_|  \s
+                """);
+        out.println("Your inability to pick one of the options has caused you to die of boredom!");
+        out.println("Start over to try again!");
+        exit(0);
+    }
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(in);
