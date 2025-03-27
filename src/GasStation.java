@@ -12,8 +12,12 @@ public class GasStation {
         gasStationCompletion = gasCompletion;
     }
 
-    public void g1note() {
+    private final String y = "\u001B[33m";
+    private final String c = "\u001B[0m";
+    public void g1dialogue() {
 
+        out.println("""
+                """);
     }
 
     public void g1() {
@@ -23,12 +27,15 @@ public class GasStation {
                   or not the gas station is going to be safe. From the looks of it the station has not seen any foot-
                   traffic in quite some time. You enter the station with your eyes peeled for anything useful.
                   
-                  A note is taped to the employee side of the cash register. Do you read it? (y/n)
+                  A mysterious man in a trench coat sits behind the counter.
                   """);
+        out.printf("%s1)%s Talk\t",y,c);
+        out.printf("%s2)%s Leave",y,c);
+
         String choice = scan.nextLine().toLowerCase();
         switch (choice) {
-            case "y" -> g1note();
-            case "n" -> out.println("You leave the note taped to the register and move on.");
+            case "1" -> g1dialogue();
+            case "2" -> out.println("You leave the note taped to the register and move on.");
             default ->   Main.deathMessage();
         }
     }

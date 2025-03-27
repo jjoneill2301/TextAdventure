@@ -2,6 +2,7 @@ import java.util.Scanner;
 import static java.lang.System.*;
 
 public class Main {
+
     public static void deathMessage() {
         out.print("""
                   _____                         ____                \s
@@ -20,9 +21,10 @@ public class Main {
         Scanner scan = new Scanner(in);
         House house = new House();
         GasStation gas = new GasStation();
+
         out.println("You woke up in a house with seemingly no exits!\nUse your wits to escape from this place!");
         for (int i = 1; i <= 6; i++) {
-            House.startMessage(i);
+            House.goToMessage(i);
         }
         out.println("When asked a question, entering an option not provided by the game will cause a mysterious ghost to make you die of boredom!");
 

@@ -22,6 +22,9 @@ public class House {
     private final int r4Code = (int)(Math.random()*10);
     private final int r5Code = (int)(Math.random()*10);
 
+    private final static String y = "\u001B[33m";
+    private final static String c = "\u001B[0m";
+
     private String codeString;
     public void PadlockCode() {
         int tile;
@@ -37,8 +40,8 @@ public class House {
     public void printR1Code() {
         out.printf("""
                 Almost every single word in the book is scribbled out in dark marker. The only thing left legible
-                is the on and off occurrence of the number %d. Perhaps this is of some importance?
-                """, r1Code);
+                is the on and off occurrence of the number %s%d%s. Perhaps this is of some importance?
+                """, y, r1Code, c);
     }
 
     public void printR2Code() {
@@ -54,17 +57,14 @@ public class House {
             case 8 -> setR2Month("August");
             case 9 -> setR2Month("September");
         }
-        out.printf("""
-                The calendar is for the year of 19%d%d. The month is flipped to %s and each date has been crossed off
-                except for any dates that happen to include the number %d.
-                """, r2Code, r2Code, r2Month, r2Code);
+        out.printf("The calendar is for the year of 19%s%d%d%s. The month is flipped to %s%s%s\n"
+                ,y ,r2Code, r2Code, c, y, r2Month, c);
     }
-
 
     public void printR3Code() {
         if (r3Code <= 0.5) {
-            out.println("""
-                    Upon closer inspection, you see it isn't tiling at all! It is the number 0 written over and over in
+            out.printf("""
+                    Upon closer inspection, you see it isn't tiling at all! It is the number %s0%s written over and over in
                     a dotted pattern! Creepy... Who would have done all of that?
                       00000000000000
                       00000000000000
@@ -73,10 +73,10 @@ public class House {
                       00000000000000
                       00000000000000
                       00000000000000
-                    """);
+                    """, y, c);
         } else {
-            out.println("""
-                    Upon closer inspection, you see it isn't tiling at all! It is the number 8 written over and over in
+            out.printf("""
+                    Upon closer inspection, you see it isn't tiling at all! It is the number %s8%s written over and over in
                     a looping pattern! Creepy... Who would have done all of that?
                       88888888888888
                       88888888888888
@@ -86,7 +86,7 @@ public class House {
                       88888888888888
                       88888888888888
                       88888888888888
-                    """);
+                    """, y, c);
         }
 
     }
@@ -96,21 +96,19 @@ public class House {
                     You see a note in the breast pocket of the jacket. 'I left the lock-box under the bed unlocked for you,
                     I know you have the spare keys so if you could put them back when you're done that would be great. Love you.'
                     You walk over to the bed and look underneath. Sure enough there lies a lock-box, unlocked. Inside
-                    is a collection of wedding photos and a deck of 52 cards, or rather 52 cards that are all %d of
+                    is a collection of wedding photos and a deck of 52 cards, or rather 52 cards that are all %s%d%s of
                     clubs. Whoever that note was for must have read it because just like the note instructed a spare
                     key has been left behind. <Key Acquired>
-                    """, r4Code);
+                    """, y, r4Code, c);
     }
 
     public void printR5Code() {
-        out.printf("Upon closer inspection, each shoebox is unique in the shoe it contains, but each shoe is a size %d. Who is buying all of these?!", r5Code);
+        out.printf("Upon closer inspection, each shoebox is unique in the shoe it contains, but each shoe is a size %s%d%s.", y, r5Code, c);
+        out.println("Who is buying all of these?!");
     }
 
-    public static void startMessage(int roomNumber) {
-        out.println("Start in room " + roomNumber + " (Press " + roomNumber + ")");
-    }
-    public static void goToMessage(int roomNumber) {
-        out.println("Start in room " + roomNumber + " (Press " + roomNumber + ")");
+    public static void goToMessage(int rNum) {
+        out.printf("Go to Room %s%d%s (Press %s%d%s)\n", y, rNum, c, y, rNum, c);
     }
 
     public void cardArt() {
@@ -201,10 +199,10 @@ public class House {
     }
     public void r1() {
         Scanner scan = new Scanner(in);
-        out.println("""
+        out.printf("""
                   You enter room one. It looks like it used to be a study. It is dusty and there are a number of books
                   arranged on the shelves. Each book is meticulously placed, however there is one particular book
-                  protruding from the dusty old bookshelf. Do you pick it up? (y/n)""");
+                  protruding from the dusty old bookshelf. Do you pick it up? %s(y/n)%s\t""", y, c);
         String choice = scan.nextLine().toLowerCase();
         switch (choice) {
             case "y" -> printR1Code();
@@ -221,16 +219,16 @@ public class House {
         switch (choice) {
             case "2" -> r2();
             case "3" -> r3();
-            default -> Main.deathMessage();
+//            default -> Main.deathMessage();
         }
     }
 
     public void r2() {
         Scanner scan = new Scanner(in);
-        out.println("""
+        out.printf("""
                 You enter room two. It looks like it used to be a kitchen. Grime coats the stove and the air is filled
                 with dust. The window above the sink has wooden boards nailed on which lets in rays of light that pierce
-                through the dusty old air and land on the decrepit floor. A calendar is stuck on the fridge, do you investigate? (y/n)""");
+                through the dusty old air and land on the decrepit floor. A calendar is stuck on the fridge, do you investigate? %s(y/n)%s\t""", y, c);
         String choice = scan.nextLine().toLowerCase();
 
         switch (choice) {
@@ -242,8 +240,8 @@ public class House {
         }
 
         out.println("There are two connecting rooms to room two. Room one appears to be an old library, while room four is a bedroom.");
-        out.println("Go to room 1 (Press 1)");
-        out.println("Go to room 4 (Press 4)");
+        goToMessage(1);
+        goToMessage(4);
         choice = scan.nextLine();
         switch (choice) {
             case "1" -> r1();
@@ -254,10 +252,10 @@ public class House {
 
     public void r3() {
         Scanner scan = new Scanner(in);
-        out.println("""
+        out.printf("""
                 You enter room three. It is by far the strangest bathroom you have been in, considering it has three doors.
                 You really don't want to be in here any longer than required. The mirror is cracked as well as the floor tiling.
-                The bath tiling however is not cracked. Do you choose to investigate? (y/n)""");
+                The bath tiling however is not cracked. Do you choose to investigate? %s(y/n)%s\t""", y, c);
         String choice = scan.nextLine().toLowerCase();
         switch (choice) {
             case "y" -> printR3Code();
@@ -266,9 +264,9 @@ public class House {
             default -> Main.deathMessage();
         }
         out.println("There are three rooms connected to room three. Room one seems to be an old library. Room four looks like an old bedroom, and room five is a mudroom/coatroom.");
-        out.println("Go to room 1 (Press 1)");
-        out.println("Go to room 4 (Press 4)");
-        out.println("Go to room 5 (Press 5)");
+        goToMessage(1);
+        goToMessage(4);
+        goToMessage(5);
         choice = scan.nextLine();
         switch (choice) {
             case "1" -> r1();
@@ -282,11 +280,11 @@ public class House {
 
     public void r4() {
         Scanner scan = new Scanner(in);
-        out.println("""
+        out.printf("""
                 You enter the bedroom at room four. The blinds are drawn and the once white walls now are stained a mildewy yellow.
                 Two things immediately stick out to you. The closet is completely empty spare for a single leather coat.
                 The second thing you notice is the way the floorboards creak with each step you take.
-                Do you want to check out the coat in the closet? (y/n)""");
+                Do you want to check out the coat in the closet? %s(y/n)%s\t""", y, c);
         String choice = scan.nextLine().toLowerCase();
         switch (choice) {
             case "y" -> {
@@ -301,8 +299,8 @@ public class House {
 
 
         out.println("There are two connecting rooms to room four. Room two appears to be the kitchen, while room three is the bathroom.");
-        out.println("Go to room 2 (Press 2)");
-        out.println("Go to room 3 (Press 3)");
+        goToMessage(2);
+        goToMessage(3);
         choice = scan.nextLine();
         switch (choice) {
             case "2" -> r2();
@@ -313,9 +311,9 @@ public class House {
 
     public void r5() {
         Scanner scan = new Scanner(in);
-        out.println("""
+        out.printf("""
                 You enter room five. Considering its purpose as a mudroom, a large amount of shoes would not typically surprise you.
-                What is surprising is that every shoe here has been kept in its shoebox, unopened. Do you want to look closer? (y/n)""");
+                What is surprising is that every shoe here has been kept in its shoebox, unopened. Do you want to look closer? %s(y/n)%s\t""", y, c);
         String choice = scan.nextLine().toLowerCase();
         switch (choice) {
             case "y" -> printR5Code();
@@ -326,7 +324,7 @@ public class House {
         }
 
         out.println("There are two connecting rooms to room five. Room three appears to be the bathroom, while the other door is padlocked.");
-        out.println("Go to room 3 (Press 3)");
+        goToMessage(3);
         out.println("Look at padlock (Press 6)");
         choice = scan.nextLine();
         if (choice.equals("3")) {
@@ -338,7 +336,7 @@ public class House {
                     Now that you think about it, there were 5 clues in total, each of which can be found in rooms numbered 1-5 on the door.
                     Try using the number found in room one's clue in the first digit of the code, the second clue in the second digit, etc.
                     
-                    Enter code:""");
+                    Enter code:\t""");
             choice = scan.nextLine();
             PadlockCode();
             if (choice.equals(codeString)) {
